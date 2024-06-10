@@ -20,8 +20,10 @@ a:hover {
   text-decoration: none;
 }
   /* Add your CSS styles here */
-  .calculator { max-width: 300px; 
-    margin: auto; 
+  .calculator { 
+    max-width: 300px;
+    min-width: 300px; 
+    margin: 25%; /*centered the calculator*/
     border: solid;
     border-radius: 10px;
     padding: 2px;
@@ -29,6 +31,7 @@ a:hover {
     box-shadow: #6c6f6e 0px 0px 14px 3px;
     transition: (0.65, 0.14, 0.51, 0.74) 0.2s 0.3s;
   }
+
   .calculator:hover {
     box-shadow: #6c6f6e 0px 0px 18px 6px;
     }
@@ -129,13 +132,18 @@ a:hover {
     width: -webkit-fill-available;
     padding-right: 20px 15px;
   }
-
-
+/* info style */
+.info{
+  text-transform: capitalize;
+  font-weight: bold;
+  
+}
 
 
 </style>
 </head>
 <body>
+  <header><span class="info">you can use your keyboard numeric keys (1,2,3,4,5,6,7,8,9,+,-,/,x as *)</span></header>
 
 <div class="calculator">
   <div class="display" id="display">0</div>
@@ -183,6 +191,7 @@ a:hover {
       display.innerText += value;
     }
   }
+
 
   function clearDisplay() {
     display.innerText = '0';
@@ -294,6 +303,12 @@ document.addEventListener('keypress', function(event) {
     if (event.key === 'x') {
       appendToDisplay("*");
     }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '.') {
+      appendToDisplay(".");
+    }
+   
   });
  
 
