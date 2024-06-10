@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Calculator</title>
+<style>
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #272829;
+}
+
+a {
+  color: #149ddd;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #37b3ed;
+  text-decoration: none;
+}
+  /* Add your CSS styles here */
+  .calculator { max-width: 300px; 
+    margin: auto; 
+    border: solid;
+    border-radius: 10px;
+    padding: 2px;
+    background-color: black;
+    box-shadow: #6c6f6e 0px 0px 14px 3px;
+    transition: (0.65, 0.14, 0.51, 0.74) 0.2s 0.3s;
+  }
+  .calculator:hover {
+    box-shadow: #6c6f6e 0px 0px 18px 6px;
+    }
+  
+  .calculator .display { 
+      width: auto;
+      padding: 10px;
+      background: #0d0d0d; 
+      text-align: right; 
+      color: azure;
+      font-size: 80px;
+      border: solid black;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+  .calculator button { 
+    width: 70px;
+    height: 70px; 
+    padding: 15px; 
+    background: #5c5b5b; 
+    color: azure;
+    margin-top: 4px;
+    font-weight: bolder;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 50%;
+  }
+
+  .col{
+    background-color: rgb(255, 145, 0) !important;
+  }
+  .col:active{
+    background-color: rgb(255, 179, 0) !important;
+  }
+
+  .col:hover{
+    background-color: rgb(255, 179, 0) !important;
+  }
+
+  .row{
+    background-color: #a9a6a6 !important;
+  }
+  .row:active{
+    background-color: rgb(186, 187, 187) !important;
+  }
+  .row:hover{
+    background-color: rgb(186, 187, 187) !important;
+  }
+
+  .zero{
+    width: 143px !important;
+    border-radius: 45px !important;
+    align-items: start !important;
+    padding: 0 !important;
+
+  }
+
+  .calculator button:active { 
+    background: #aaaaaa; 
+  }
+  .btn{ 
+    border: solid 2px black;
+  }
+  .btn:hover{
+    background-color: rgb(124, 124, 124);
+  }
+
+
+
+  #footer {
+
+  padding: 15px;
+  color: #f4f6fd;
+  font-size: 14px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: max-content;
+  z-index: 9999;
+  background: #040b14;
+  margin-top: 15%;
+}
+
+#footer .copyright {
+  text-align: center;
+}
+
+#footer .credits {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: #eaebf0;
+}
+
+@media (max-width: 1199px) {
+  #footer {
+    position: static;
+    width: auto;
+    padding-right: 20px 15px;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <div class="display" id="display">0</div>
+
+  <button class="btn row" onclick="clearDisplay()">AC</button>
+  <button class="btn row" onclick="backspace()">←</button>
+  <button class="btn row" onclick="appendToDisplay('%')">%</button>
+
+  <button class="btn col" onclick="appendToDisplay('/')">/</button>
+  
+ 
+  
+  
+
+  <button class="btn num" onclick="appendToDisplay('7')">7</button>
+  <button class="btn num" onclick="appendToDisplay('8')">8</button>
+  <button class="btn num" onclick="appendToDisplay('9')">9</button>
+  <button class="btn col" onclick="appendToDisplay('*')">x</button>
+
+  <button class="btn num" onclick="appendToDisplay('4')">4</button>
+  <button class="btn num" onclick="appendToDisplay('5')">5</button>
+  <button class="btn num" onclick="appendToDisplay('6')">6</button>
+  <button class="btn col" onclick="appendToDisplay('-')">-</button>
+
+  <button class="btn num" onclick="appendToDisplay('1')">1</button>
+  <button class="btn num" onclick="appendToDisplay('2')">2</button>
+  <button class="btn num" onclick="appendToDisplay('3')">3</button>
+  <button class="btn col" onclick="appendToDisplay('+')">+</button>
+ 
+  <button class="btn zero" onclick="appendToDisplay('0')">0</button>
+  <button class="btn" onclick="appendToDisplay('.')">.</button>
+  <button class="btn col" id="enter" onclick="calculate()" id="equalTo">=</button>
+  
+</div>
+
+
+
+<script>
+  let display = document.getElementById('display');
+
+  function appendToDisplay(value) {
+    if(display.innerText === '0') {
+      display.innerText = value;
+    } else {
+      display.innerText += value;
+    }
+  }
+
+  function clearDisplay() {
+    display.innerText = '0';
+  }
+
+  function calculate() {
+   
+    try {
+      display.innerText = eval(display.innerText);
+    } catch {
+      display.innerText = 'Error';
+    }
+  }
+
+  function backspace() {
+  display.innerText = display.innerText.substring(0, display.innerText.length - 1);
+  if(display.innerText === '') {
+  display.innerText = '0';
+}
+}
+
+// function backspace() {
+//   var currentValue = display.value;
+//   display.value = currentValue.substr(0, currentValue.length - 1);
+// };
+
+document.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      calculate();
+    }
+    else if (event.key === 'd') {
+    backspace();
+  }
+  });
+
+
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '1') {
+      appendToDisplay("1");
+    }
+  });
+ 
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '2') {
+      appendToDisplay("2");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '3') {
+      appendToDisplay("3");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '4') {
+      appendToDisplay("4");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '5') {
+      appendToDisplay("5");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '6') {
+      appendToDisplay("6");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '7') {
+      appendToDisplay("7");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '8') {
+      appendToDisplay("8");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '9') {
+      appendToDisplay("9");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '0') {
+      appendToDisplay("0");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '+') {
+      appendToDisplay("+");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '-') {
+      appendToDisplay("-");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '/') {
+      appendToDisplay("/");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '*') {
+      appendToDisplay("*");
+    }
+  });
+  document.addEventListener('keypress', function(event) {
+    if (event.key === 'x') {
+      appendToDisplay("*");
+    }
+  });
+ 
+
+
+</script>
+
+
+<footer id="footer">
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Bobod</span></strong>
+    </div>
+    <div class="credits">
+      Designed by <a href="mailto:bobodproject@gmail.com">Bobo-D</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
